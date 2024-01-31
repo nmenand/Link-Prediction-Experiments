@@ -12,7 +12,7 @@ from sklearn.multiclass import OneVsRestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, precision_recall_curve, auc, f1_score, accuracy_score, precision_score
 from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
-from karateclub import BoostNE, NodeSketch, GraRep, NetMF, Node2Vec, DeepWalk, RandNE, GLEE, Walklets, Role2Vec, GraphWave
+from karateclub import BoostNE, NodeSketch, GraRep, NetMF, Node2Vec, DeepWalk, RandNE, GLEE, Walklets, Role2Vec
 
 import argparse
 
@@ -31,9 +31,13 @@ if args.graRep:
 else:
   embedding_names = ['node2vec', 'deepwalk', 'netmf', 'BoostNE', 'RandNE', 'Walklets', 'Role2Vec']
 
-
 train_g = nx.read_adjlist(f"{dataset}-train.adjlist", nodetype=int)
 #train_g = nx.convert_node_labels_to_integers(train_g)
+
+numeric_indices = [index for index in range(train_g.number_of_nodes())]
+node_indices = sorted([node for node in train_g.nodes()])
+print(numeric_indices == node_indices)
+
 
 for emb in embedding_names:
     print(emb)
