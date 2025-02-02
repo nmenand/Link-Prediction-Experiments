@@ -161,7 +161,7 @@ def link_prediction(vecs, train_pair, test_pair, y_train, y_test, whole_adj, lab
                   if train_adj[pair[0], pair[1]]:
                       vec_row_scores[pair[1]] = -np.inf
             
-            vec_predictions = np.argpartition(-vec_row_scores, 100)
+            vec_predictions = np.argsort(-vec_row_scores)
 
             prec_10 = np.sum([adj[pair[0], pair[1]]  for pair in pairs[vec_predictions[:10]]]) / 10
             recall_10 = np.sum([adj[pair[0], pair[1]]  for pair in pairs[vec_predictions[:10]]]) / edges
@@ -376,7 +376,7 @@ def simple_link_prediction(test_pair, y_test, whole_adj, label_counts, emb, samp
                   if train_adj[pair[0], pair[1]]:
                       row_scores[pair[1]] = -np.inf
             
-            vec_predictions = np.argpartition(-row_scores, 100)
+            vec_predictions = np.argsort(-vec_row_scores)
 
             # TODO: Make more Efficient
             prec_10 = np.sum([adj[pair[0], pair[1]]  for pair in pairs[vec_predictions[:10]]]) / 10
