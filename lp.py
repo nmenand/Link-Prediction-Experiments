@@ -89,7 +89,7 @@ def link_prediction(vecs, train_pair, test_pair, y_train, y_test, whole_adj, lab
     #clf = MLPClassifier(random_state=1, hidden_layer_sizes=(256, 256, 256), learning_rate_init=0.005, max_iter=1000)
     clf = OneVsRestClassifier(LogisticRegression(solver="liblinear", multi_class="ovr"))
     print('Training model')
-    clf.fit(X_train, y_train.ravel())
+    #clf.fit(X_train, y_train.ravel())
     clf.fit(X_train, y_train)
     print('Done training')
    
